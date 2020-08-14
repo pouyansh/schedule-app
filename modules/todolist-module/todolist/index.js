@@ -13,14 +13,14 @@ class Todolist {
     getAll() {this.repo.getAll()}
 
     // Reading data from db and writing it in the table
-    displayTodolist() {
+    displayTodolist(chart_generator) {
         let data = this.repo.getAll()
         data.forEach((item, _) => {
-            this.addEntry(item)
+            this.addEntry(item, chart_generator)
         })
     }
 
-    addEntry(item) {
+    addEntry(item, chart_generator) {
         const td = document.getElementById('todolist-container')
         let total_container = document.createElement('div')
         total_container.className = "ui container border-top--grey"
@@ -105,6 +105,8 @@ class Todolist {
             button_div.appendChild(button)
         }
         total_container.appendChild(button_div)
+
+        total_container.appendChild(chart_generator(item.id, parseInt(item.total)))
     
         td.appendChild(total_container)
     }

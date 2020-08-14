@@ -7,7 +7,7 @@ ipcRenderer.on('item:clear', () => {todolist.clearAll()})
 
 let daily_progress = new DailyProgress()
 let todolist = new Todolist()
-todolist.displayTodolist()
+todolist.displayTodolist(daily_progress.createChart)
 
 function removeItem (item) {
     todolist.remove(item)
