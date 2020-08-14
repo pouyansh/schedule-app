@@ -66,7 +66,11 @@ class Todolist {
             button.setAttribute('class', 'ui positive basic button bold-text')
             button.innerHTML = '+'
             button.addEventListener('click', function (){
-                increment(item, '1')
+                let amount = parseInt(document.getElementById("input" + item.id).value)
+                if(amount)
+                    increment(item, '1', amount)
+                else
+                    increment(item, '1', 1)
             })
             button_div.appendChild(button)
             div_or = document.createElement('div')
@@ -77,7 +81,11 @@ class Todolist {
             button.setAttribute('class', 'ui orange basic button bold-text')
             button.innerHTML = '-'
             button.addEventListener('click', function (){
-                increment(item, '1', -1)
+                let amount = parseInt(document.getElementById("input" + item.id).value)
+                if(amount)
+                    increment(item, '1', -amount)
+                else
+                    increment(item, '1', -1)
             })
             button_div.appendChild(button)
             div_or = document.createElement('div')
@@ -88,7 +96,11 @@ class Todolist {
         button.setAttribute('class', 'ui primary basic button bold-text')
         button.innerHTML = '++'
         button.addEventListener('click', function (){
-            increment(item, '0')
+            let amount = parseInt(document.getElementById("input" + item.id).value)
+                if(amount)
+                    increment(item, '0', amount)
+                else
+                    increment(item, '0', 1)
         })
         button_div.appendChild(button)
     
@@ -100,11 +112,24 @@ class Todolist {
             button.setAttribute('class', 'ui negative basic button bold-text')
             button.innerHTML = '--'
             button.addEventListener('click', function (){
-                increment(item, '0', -1)
+                let amount = parseInt(document.getElementById("input" + item.id).value)
+                if(amount)
+                    increment(item, '0', -amount)
+                else
+                    increment(item, '0', -1)
             })
             button_div.appendChild(button)
         }
         total_container.appendChild(button_div)
+
+        let div_input = document.createElement('div')
+        div_input.className = "ui input full-length"
+        let input = document.createElement('input')
+        input.setAttribute('type', 'number')
+        input.setAttribute('placeholder', "Enter amount of change (empty equals 1)")
+        input.setAttribute('id', 'input' + item.id)
+        div_input.appendChild(input)
+        total_container.appendChild(div_input)
 
         total_container.appendChild(chart_generator(item.id, parseInt(item.total)))
     

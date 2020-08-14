@@ -3,7 +3,7 @@ const Todolist = require('./todolist/index')
 
 const {ipcRenderer} = require('electron')
 ipcRenderer.on('item:add', (_, item) => {todolist.create(item)})
-ipcRenderer.on('item:clear', () => {todolist.clearAll()})
+ipcRenderer.on('item:clear', () => {todolist.clearAll();daily_progress.clearAll()})
 
 let daily_progress = new DailyProgress()
 let todolist = new Todolist()
@@ -13,9 +13,9 @@ function removeItem (item) {
     todolist.remove(item)
     daily_progress.removeItem(item.id)
 }
-function increment (item, check, amount = 1) {
+function increment (item, check, amount) {
     if(check=='1') {
-        if(parseInt(item.progress)+amount >= 0) {
+        if(parseInt(item.progress)+amount >= 0 && parseInt(item.progress)+amount <= parseInt(item.total)) {
             todolist.update({name: item.name, progress: parseInt(item.progress)+amount, total: item.total, id: item.id})
             let d = new Date()
             daily_progress.increment(item.id, d, amount, check)

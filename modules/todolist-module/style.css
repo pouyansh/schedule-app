@@ -89,7 +89,7 @@
 			width:100%;
 			font-weight:normal;
 			text-align:center;
-      white-space:nowrap;
+            white-space:nowrap;
 			text-indent:0;
 			transform:rotate(-45deg);
 		}
@@ -101,9 +101,7 @@
 		.graph td {
 			width:100%;
 			height:100%;
-			background:rgb(6, 156, 255);
-			border-radius:0.5em 0.5em 0 0;
-			
+			background:rgba(90, 36, 0, 0.61);	
 		}
 
 		.graph tr:hover td {
