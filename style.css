@@ -1,0 +1,76 @@
+.background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-image: url("./assets/background/4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.row {
+    padding: 1rem 0;
+    display: flex;
+    width: 95%;
+    margin: auto;
+}
+
+.todolist__list-container {
+    width: 65%;
+    border: 3px solid #ddd;
+    padding: 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0 1%;
+}
+
+.todolist__toolbar {
+    width: 35%;
+    padding: 1rem;
+    overflow: hidden;
+    margin: 0 1%;
+}
+
+.todolist__little-margin {
+    margin: 1rem 0;
+}
+
+.full-length {width: 100%;}
+
+.display-flex {display: flex;}
+
+.width-70 {width: 70%;margin:auto}
+.width-90 {width: 90%;margin:auto}
+
+.padding-top--5rem {padding-top: 5rem}
+
+.todolist__buttons {
+    padding: .5rem;
+    width: 100%;
+}
+
+.little-padding {
+    padding: .5rem;
+}
+
+.border-top--grey {
+    border-top: 2px solid grey;
+    padding-top: 2rem;
+    margin-top: 2rem;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+}
+.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+.background--white-60 {background: rgba(255, 255, 255, 0.6) !important;}
+
+.border-radius--1rem {border-radius: 1rem !important;overflow: hidden;}
+
+.bold-text {font-weight: 700!important;}
