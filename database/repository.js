@@ -9,8 +9,8 @@ class Repository {
   }
 
   createTable() {
-    if(!fs.existsSync(data_location + this.db_name + ".json"))
-      db.createTable(this.db_name, data_location, (msg) => {console.log("Message: " + msg);})
+    if(!fs.existsSync(data_location + '/' + this.db_name + ".json"))
+      db.createTable(this.db_name, data_location, (succ, msg) => {console.log("Message: " + succ + msg);})
   }
 
   create(item) {

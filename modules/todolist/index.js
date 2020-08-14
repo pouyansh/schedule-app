@@ -1,9 +1,10 @@
+const DailyProgress = require('./daily-progress/index')
+let d = new DailyProgress()
+d.chert()
+
 const {ipcRenderer} = require('electron')
 
-const Todolist_file = './data/list.txt'
-const id_file = './data/id.txt'
-
-const Repository = require('./database/repository')
+const Repository = require('../../database/repository')
 const todoRepo = new Repository('todolist')
 todoRepo.createTable()
 
