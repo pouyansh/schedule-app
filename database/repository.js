@@ -14,20 +14,28 @@ class Repository {
   }
 
   create(item) {
-    db.insertTableContent(this.db_name, data_location, item, (msg) => {console.log("Message: " + msg);})
+    db.insertTableContent(this.db_name, data_location, item, (succ, msg) => {console.log("Message: " + succ + msg);})
   }
 
   update(item) {
-    db.updateRow(this.db_name, data_location, {id: item.id}, item, (msg) => {console.log("Message: " + msg);})
+    db.updateRow(this.db_name, data_location, {id: item.id}, item, (succ, msg) => {console.log("Message: " + succ + msg);})
   }
 
   delete(id) {
-    db.deleteRow(this.db_name, data_location, {id}, (msg) => {console.log("Message: " + msg);})
+    db.deleteRow(this.db_name, data_location, {id}, (succ, msg) => {console.log("Message: " + succ + msg);})
   }
 
   getById(id) {
     let all_data
     db.getRows(this.db_name, data_location, {id}, (_, data) => {
+      all_data = data
+    })
+    return all_data
+  }
+
+  get(item) {
+    let all_data
+    db.getRows(this.db_name, data_location, item, (_, data) => {
       all_data = data
     })
     return all_data
