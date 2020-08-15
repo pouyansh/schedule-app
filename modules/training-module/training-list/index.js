@@ -7,7 +7,7 @@ class TrainingList {
     }
     
     get (item) {return this.repo.get(item)}
-    getAll() {return this.repo.getAll()}
+    getAll = () => {return this.repo.getAll()}
     create (item) {this.repo.create(item)}
     clearAll () {this.repo.clearAll()}
     remove (id) {this.repo.delete(id)}

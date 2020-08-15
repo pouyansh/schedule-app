@@ -46,6 +46,8 @@
 
 .padding-top--5rem {padding-top: 5rem}
 
+.overflowx--scroll {overflow-x: scroll;}
+
 .buttons {
     padding: .5rem;
     width: 100%;
