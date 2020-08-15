@@ -7,14 +7,15 @@ let win
 
 function createWindow() {
     win = new BrowserWindow ({
-        width: 1200, 
+        width: 1400, 
         height: 1000,
+        // fullscreen: true,
         webPreferences: {
             nodeIntegration: true
         }
     })
     win.loadURL(url.format({
-        pathname:path.join(__dirname, 'main.html'),
+        pathname:path.join(__dirname, './modules/home-module/index.html'),
         protocol: 'file',
         slashes: true
     }))
@@ -41,18 +42,18 @@ app.on('activate', () => {
     }
 })
 
-ipcMain.on('item:add', (e, item) => {
-    win.webContents.send('item:add', item);
-})
+ipcMain.on('todo:add', (e, item) => {win.webContents.send('todo:add', item);})
+ipcMain.on('training:add_category', (e, item) => {win.webContents.send('training:add_category', item);})
+ipcMain.on('training:add', (e, item) => {win.webContents.send('training:add', item);})
 
 const mainMenuTemplate = [
     {
         label: 'File',
         submenu: [
             {
-                label: 'Clear Items',
+                label: 'Clear all TODO items',
                 click(){
-                    win.webContents.send('item:clear')
+                    win.webContents.send('todo:clear')
                 }
             },
             {
@@ -73,7 +74,7 @@ if(process.env.NODE_ENV !== 'production'){
             {
                 label: 'toggle dev tools',
                 accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(item, focusedWindow) {
+                click(_, focusedWindow) {
                     focusedWindow.toggleDevTools();
                 }
             },{

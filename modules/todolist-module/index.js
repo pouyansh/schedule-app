@@ -5,8 +5,8 @@ const create_menu = require('../index')
 create_menu('TODO list')
 
 const {ipcRenderer} = require('electron')
-ipcRenderer.on('item:add', (_, item) => {todolist.create(item)})
-ipcRenderer.on('item:clear', () => {todolist.clearAll();daily_progress.clearAll()})
+ipcRenderer.on('todo:add', (_, item) => {todolist.create(item)})
+ipcRenderer.on('todo:clear', () => {todolist.clearAll();daily_progress.clearAll()})
 
 let daily_progress = new DailyProgress()
 let todolist = new Todolist()
@@ -42,7 +42,7 @@ function add_item () {
         const progress = document.getElementById('progress').value;
         const total = document.getElementById('total').value;
         const item = {name, progress, total}
-        ipcRenderer.send('item:add', item)
+        ipcRenderer.send('todo:add', item)
     })
 }
 add_item()

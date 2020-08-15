@@ -14,7 +14,7 @@
     margin: auto;
 }
 
-.todolist__list-container {
+.list-container {
     width: 65%;
     border: 3px solid #ddd;
     padding: 2rem;
@@ -30,8 +30,8 @@
     margin: 0 1%;
 }
 
-.todolist__little-margin {
-    margin: 1rem 0;
+.little-margin {
+    margin: .5rem 0;
 }
 
 .full-length {width: 100%;}
@@ -46,7 +46,7 @@
 
 .padding-top--5rem {padding-top: 5rem}
 
-.todolist__buttons {
+.buttons {
     padding: .5rem;
     width: 100%;
 }
