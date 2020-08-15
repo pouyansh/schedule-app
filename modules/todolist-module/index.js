@@ -1,6 +1,9 @@
 const DailyProgress = require('./daily-progress/index')
 const Todolist = require('./todolist/index')
 
+const create_menu = require('../index')
+create_menu('TODO list')
+
 const {ipcRenderer} = require('electron')
 ipcRenderer.on('item:add', (_, item) => {todolist.create(item)})
 ipcRenderer.on('item:clear', () => {todolist.clearAll();daily_progress.clearAll()})
