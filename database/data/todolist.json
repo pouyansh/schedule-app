@@ -1,10 +1,16 @@
 {
   "todolist": [
     {
-      "name": "aq",
-      "progress": 16,
-      "total": 37,
-      "id": 1597408281674
+      "name": "Review Gabow's Paper",
+      "progress": "0",
+      "total": "2",
+      "id": 1597495868254
+    },
+    {
+      "name": "Meeting with Sharath (Thursday 18:30)",
+      "progress": "0",
+      "total": "1",
+      "id": 1597495916789
     }
   ]
 }

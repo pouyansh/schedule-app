@@ -37,7 +37,13 @@ function add_training () {
         const difficulty = document.getElementById('difficulty').value;
         const description = document.getElementById('description').value;
         let splitted = date.split('/')
-        const item = {category, date: splitted[1], month: parseInt(splitted[0])-1, year: splitted[2], period, calories, difficulty, description}
+        let item
+        if (date) {
+            item = {category, date: splitted[1], month: parseInt(splitted[0])-1, year: splitted[2], period, calories, difficulty, description}
+        } else {
+            let d = new Date(Date.now())
+            item = {category, date: d.getDate(), month: d.getMonth(), year: d.getFullYear(), period, calories, difficulty, description}
+        }
         ipcRenderer.send('training:add', item)
     })
 }

@@ -2,16 +2,15 @@
 <html>
    <head>
         <meta charset = "UTF-8">
-        <title>Training</title>
+        <title>Medication</title>
         <link rel="stylesheet" type="text/css" href="../../Semantic-UI-CSS-master/semantic.min.css">
         <link rel="stylesheet" type="text/css" href="../../style.css">
-        <link rel="stylesheet" type="text/css" href="./style.css">
         <script>window.$ = window.jQuery = require('jquery');</script>
    </head>
    
    <body>
         <div class="background"></div> 
-        <div class="padding-top--5rem padding--1rem">
+        <div class="width-90 padding-top--5rem">
             <div class="ui grid">
                 <div class="twelve wide stretched column">
                     <div class="ui segment background--white-60" id="sections">
@@ -19,57 +18,58 @@
                             <div class="row">
                                 <div id='list' class="list-container background--white-60">
                                     <h1 class="ui header">
-                                        <i class="volleyball ball icon"></i>
+                                        <i class="pills icon"></i>
                                         <div class="content">
-                                            Training
+                                            Medication
                                         </div>
                                     </h1>
-                                    <div id="container" class="overflowx--scroll">
+                                    <div id="container">
                                     </div>
                                 </div>
                             
                                 <div class="toolbar">
                                     <div class="ui card background--white-60">
                                         <div class="content">
-                                            <div class="header">Add Training</div>
+                                            <div class="header">Used Medication</div>
                                         </div>
                                         <div class="content">
-                                            <form id='training_form'>
-                                                <select class="ui dropdown little-margin full-length" id="select_training">
-                                                    <option value="">Category</option>
+                                            <form id='medication_used_form'>
+                                                <select class="ui dropdown little-margin full-length" id="medicine">
+                                                    <option value="">Choose Medicine</option>
                                                 </select>
                                                 <div class="ui input little-margin full-length">
-                                                    <input type="text" id="date" placeholder="Enter date (Empty means today)">
+                                                    <input type="text" id="date" placeholder="Date (M:D:Y:H) (Empty: now)">
                                                 </div>
                                                 <div class="ui input little-margin full-length">
-                                                    <input type="number" id="period" placeholder="Enter period (minutes)">
-                                                </div>
-                                                <select class="ui dropdown little-margin full-length" id="difficulty">
-                                                    <option value="">Difficulty</option>
-                                                    <option value="1">Easy</option>
-                                                    <option value="2">Normal</option>
-                                                    <option value="3">Hard</option>
-                                                </select>
-                                                <div class="ui input little-margin full-length">
-                                                    <input type="number" id="calories" placeholder="Enter calories burnt (if known)">
+                                                    <input type="number" id="next-hours" placeholder="Next time (hours) (Empty: usual)">
                                                 </div>
                                                 <div class="ui input little-margin full-length">
-                                                    <input type="text" id="description" placeholder="Enter additional description ...">
+                                                    <input type="number" id="next-days" placeholder="Next time (days) (Empty: usual)">
                                                 </div>
-                                                <button type="submit" class="ui primary button" id="submit">Add Training</button>
+                                                <div class="ui slider checkbox little-margin full-length">
+                                                    <input type="checkbox" id="change">
+                                                    <label>Change the next time to use</label>
+                                                </div>
+                                                <button type="submit" class="ui primary button" id="submit">Add record</button>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="ui card background--white-60">
                                         <div class="content">
-                                            <div class="header">Add Training Category</div>
+                                            <div class="header">Add Medicine</div>
                                         </div>
                                         <div class="content">
-                                            <form id='training-category-form'>
+                                            <form id='medicine_form'>
                                                 <div class="ui input little-margin full-length">
-                                                    <input type="text" id="name" placeholder="Enter Category's Name">
+                                                    <input type="text" id="name" placeholder="Enter medicine's name">
                                                 </div>
-                                                <button type="submit" class="ui primary button">Add Category</button>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="number" id="hour" placeholder="Should use once in ... hours">
+                                                </div>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="number" id="day" placeholder="Should use once in ... days">
+                                                </div>
+                                                <button type="submit" class="ui primary button">Add Medicine</button>
                                             </form>
                                         </div>
                                     </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="three wide column">
+                <div class="four wide column">
                     <div class="ui vertical fluid right tabular menu background--white-60 border-radius--1rem" id="menu">
                         
                     </div>

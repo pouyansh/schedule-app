@@ -40,7 +40,7 @@ class Training {
     }
 
     addEntry (element) {
-        let list, table_creation_list = [], headers = ["Date", "Period", "Calories", "Difficulty", "Description"]
+        let list, table_creation_list = [], headers = ["Date", "Period", "Cal.", "Dif.", "Desc."]
         list = this.get_last_five(element.id)
         
         let total_container = document.createElement('div')
@@ -58,11 +58,10 @@ class Training {
 
         list.forEach(e => {
             let dd = e.d.getDate();
-            let mm = e.d.getMonth()+1; 
-            let yyyy = e.d.getFullYear();
+            let mm = e.d.getMonth()+1;
             if(dd<10) {dd='0'+dd;}
             if(mm<10) {mm='0'+mm;}
-            table_creation_list.push([mm+'/'+dd+'/'+yyyy , e.period, e.calories, e.difficulty, e.description])
+            table_creation_list.push([mm+'/'+dd , e.period, e.calories, e.difficulty, e.description])
         });
         total_container.appendChild(create_table(headers, table_creation_list))
         return total_container
@@ -84,7 +83,7 @@ class Training {
         var rminutes = Math.round(minutes);
 
         let container = document.createElement('div')
-        container.className = "ui small statistics"
+        container.className = "ui small statistics no-margin"
 
         let div_statistics = document.createElement('div')
         div_statistics.className = "blue statistic"
@@ -94,7 +93,7 @@ class Training {
         div_statistics.appendChild(value)
         let label = document.createElement('div')
         label.className = "label"
-        label.innerHTML = "Total time"
+        label.innerHTML = "Time"
         div_statistics.appendChild(label)
         container.appendChild(div_statistics)
 
@@ -106,7 +105,7 @@ class Training {
         div_statistics.appendChild(value)
         label = document.createElement('div')
         label.className = "label"
-        label.innerHTML = "Total calories"
+        label.innerHTML = "Cal"
         div_statistics.appendChild(label)
         container.appendChild(div_statistics)
 
@@ -118,7 +117,7 @@ class Training {
         div_statistics.appendChild(value)
         label = document.createElement('div')
         label.className = "label"
-        label.innerHTML = "Average difficulty"
+        label.innerHTML = "Avg. Dif."
         div_statistics.appendChild(label)
         container.appendChild(div_statistics)
 

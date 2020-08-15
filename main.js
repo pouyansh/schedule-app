@@ -45,6 +45,9 @@ app.on('activate', () => {
 ipcMain.on('todo:add', (e, item) => {win.webContents.send('todo:add', item);})
 ipcMain.on('training:add_category', (e, item) => {win.webContents.send('training:add_category', item);})
 ipcMain.on('training:add', (e, item) => {win.webContents.send('training:add', item);})
+ipcMain.on('medication:add_medicine', (e, item) => {win.webContents.send('medication:add_medicine', item);})
+ipcMain.on('medication:used', (e, item) => {win.webContents.send('medication:used', item);})
+ipcMain.on('medication:update', (e, item) => {win.webContents.send('medication:update', item);})
 
 const mainMenuTemplate = [
     {
