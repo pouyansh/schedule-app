@@ -37,7 +37,7 @@ function add_event () {
         let splitted = hour.split(':')
         if (splitted.length == 2) {
             d = new Date(parseInt(year), parseInt(month) - 1, parseInt(date), parseInt(splitted[0]), parseInt(splitted[1]), 0,0)
-            let item = {title, date: d}
+            let item = {title, date: d, category}
             events.create(item)
         }
     })
@@ -57,4 +57,5 @@ function add_category () {
 }
 add_category()
 
-events.show_events(event_category.get)
+events.show_events(event_category.get, "after")
+events.show_events(event_category.get, "before")

@@ -67,7 +67,7 @@
 .hidden {
     visibility: hidden;
     opacity: 0;
-    display: none;
+    display: none!important;
 }
 .active {
     display: block;
@@ -81,3 +81,6 @@
 
 .bold-text {font-weight: 700!important;}
 
+.float--right {float: right}
+
+.cursor--pointer {cursor: pointer;}
