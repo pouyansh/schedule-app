@@ -37,6 +37,9 @@
                                                 <div class="ui input little-margin full-length">
                                                     <input type="text" id="title" placeholder="Enter event's title">
                                                 </div>
+                                                <select class="ui dropdown little-margin full-length" id="category">
+                                                    <option value="">Choose category</option>
+                                                </select>
                                                 <div class="ui input little-margin full-length">
                                                     <input type="number" id="date" placeholder="Date(Empty: cur. date)">
                                                 </div>
@@ -49,7 +52,26 @@
                                                 <div class="ui input little-margin full-length">
                                                     <input type="text" id="hour" placeholder="HH:MM(Empty: cur. time)">
                                                 </div>
-                                                <button type="submit" class="ui primary button">Add Medicine</button>
+                                                <button type="submit" class="ui primary button">Add event</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="ui card background--white-60">
+                                        <div class="content">
+                                            <div class="header">Add category</div>
+                                        </div>
+                                        <div class="content">
+                                            <form id='category_form'>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="text" id="name" placeholder="Enter category's title">
+                                                </div>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="text" id="code" placeholder="Enter icon's code">
+                                                </div>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="text" id="color" placeholder="Enter category color">
+                                                </div>
+                                                <button type="submit" class="ui primary button">Add category</button>
                                             </form>
                                         </div>
                                     </div>
