@@ -6,11 +6,6 @@ let medication = new Medication()
 const MedicationUsed = require('./medication-used/index')
 let medication_used = new MedicationUsed()
 
-const {ipcRenderer} = require('electron')
-ipcRenderer.on('medication:add_medicine', (_, item) => {medication.create(item)})
-ipcRenderer.on('medication:used', (_, item) => {medication_used.create(item)})
-ipcRenderer.on('medication:update', (_, item) => {medication.update_next_time(item)})
-
 // Filling medicines
 function fill_medicines () {
     let list = medication.getAll()
@@ -33,8 +28,8 @@ function add_medicine () {
         const name = document.getElementById('name').value;
         const hour = document.getElementById('hour').value;
         const day = document.getElementById('day').value;
-        let item = {name, hour, day}
-        ipcRenderer.send('medication:add_medicine', item)
+        let item = {name, hour, day, show: true}
+        medication.create(item)
     })
 }
 add_medicine()
@@ -64,13 +59,15 @@ function used_medication () {
         let days = document.getElementById('next-days').value;
         let change = document.getElementById('change').checked;
         let item = {check, medicine, date: splitted[1], month: splitted[0], year: splitted[2], hour: splitted[3]}
-        ipcRenderer.send('medication:used', item)
+        medication_used.create(item)
         if (change)
-            ipcRenderer.send('medication:update', {check, medicine, hours, days, date: splitted[1], month: splitted[0], year: splitted[2], hour: splitted[3]})
+            medication.update_next_time({check, medicine, hours, days, date: splitted[1], month: splitted[0], year: splitted[2], hour: splitted[3]})
         
     })
 }
 used_medication()
 
-medication.show_next_times()
-medication_used.show_previous_use(medication.get)
+medication.show_next_times(medication_used.get, (e) => {
+    let med = medication.get({name: e})[0]
+    medication_used.show_previous_use(med, medication.change_next_time, medication.remove)
+})

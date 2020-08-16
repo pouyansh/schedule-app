@@ -58,7 +58,7 @@ class Todolist {
         total_container.appendChild(container)
     
         let button_div = document.createElement('div')
-        button_div.setAttribute('class', 'ui buttons todolist__buttons')
+        button_div.setAttribute('class', 'ui buttons buttons')
         let button
         let div_or
         if(parseInt(item.progress) < parseInt(item.total)) {

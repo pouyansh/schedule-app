@@ -1,4 +1,4 @@
-const create_table = (header, list) => {
+const create_table = (header, list, onclick = ()=>{}) => {
     let table = document.createElement('table')
     table.className = "ui single line table"
 
@@ -21,6 +21,7 @@ const create_table = (header, list) => {
             td = document.createElement('td')
             td.innerHTML = e
             tr.appendChild(td)
+            td.addEventListener('click', () => {onclick(element[0])})
         });
         tbody.appendChild(tr)
     });

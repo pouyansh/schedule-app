@@ -8,11 +8,24 @@ class Medication {
     }
     
     get = (item) => {return this.repo.get(item)}
-    getAll = () => {return this.repo.getAll()}
+    getAll = () => {return this.repo.get({show: true})}
     create (item) {this.repo.create(item)}
     clearAll () {this.repo.clearAll()}
-    remove (id) {this.repo.delete(id)}
+    remove = (item) => {this.repo.update({id: item.id, show: false})}
     update (item) {this.repo.update(item)}
+
+    change_next_time = (item) => {
+        let {medicine, next_use} = item
+        if(next_use === "") {
+            this.update({id: medicine.id, next_use: ""})
+        } else {
+            let splitted = next_use.splitted(":")
+            if (splitted.length == 4) {
+                let d = new Date(parseInt(splitted[2], parseInt(splitted[0])-1, parseInt(splitted[1]), parseInt(splitted[3]), 0,0,0))
+                this.update({id: medicine.id, next_use: d})
+            }
+        }
+    }
 
     update_next_time (data) {
         let {check, medicine, hours, days, date, month, year, hour} = data
@@ -38,8 +51,8 @@ class Medication {
         this.update({id: parseInt(medicine), next_use: d})
     }
 
-    show_next_times () {
-        let list = this.repo.getAll()
+    show_next_times (getMedicationUsed, showPrevTable) {
+        let list = this.getAll()
         list.forEach(element => {
             element.d = new Date(element.next_use)
         })
@@ -60,13 +73,26 @@ class Medication {
 
         let table_data = []
         list.forEach(element => {
+            let used = getMedicationUsed({medicine: element.id.toString()})
+            used.forEach(e => {
+                e.d = new Date(parseInt(e.year), parseInt(e.month), parseInt(e.date), parseInt(e.hour), 0,0,0)
+            })
+            used.sort(function(a, b) {
+                return b.d - a.d 
+            });
+            let prev_use = ""
+            if(used.length > 0)
+                prev_use = (parseInt(used[0].month)+1) + "/" + used[0].date + "--" + used[0].hour + ":00"
+            // for(var i = 0; i < Math.min(5, used.length); i ++) {
+            //     prev_use = prev_use + (parseInt(used[i].month)+1) + "/" + used[i].date + "--" + used[i].hour + ":00<br>"
+            // }
             let d
             if (element.next_use) {
                 d = new Date(element.next_use)
             }
-            table_data.push([element.name, element.next_use ? (d.getMonth()+1) + "/" + d.getDate() + "--" + d.getHours() + ":00" : '-'])
+            table_data.push([element.name, element.next_use ? (d.getMonth()+1) + "/" + d.getDate() + "--" + d.getHours() + ":00" : '-', prev_use])
         });
-        total_container.appendChild(create_table(["Medicine", "Next date to use"], table_data))
+        total_container.appendChild(create_table(["Medicine", "Next date to use", "Last time used"], table_data, showPrevTable))
         container.appendChild(total_container)
     }
 }
