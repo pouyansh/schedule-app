@@ -1,4 +1,4 @@
-let chart_generator = (list, max) => {
+let chart_generator = (list, max, accumulative = "true", colors = []) => {
     let container = document.createElement('div')
     let table = document.createElement('table')
     table.className = "graph"
@@ -8,13 +8,22 @@ let chart_generator = (list, max) => {
     for(var i = 0; i < list.length; i++) {
         sum = sum + list[i]
         tr = document.createElement('tr')
-        tr.style.height = sum/max*100 + "%"
+        if(accumulative)
+            tr.style.height = sum/max*100 + "%"
+        else
+            tr.style.height = list[i]/max*100 + "%"
         td = document.createElement('td')
+        if(colors.length > 0) {
+            td.style.backgroundColor = colors[i]
+        } 
         span = document.createElement('span')
         span.innerHTML = list[i] + ", " + i
         td.appendChild(span)
         tr.appendChild(td)
         tbody.appendChild(tr)
+        let style = document.createElement('style')
+        style.innerHTML = ".graph tbody:before {content: '" + max + "'} "
+        tbody.appendChild(style)
     }
     table.appendChild(tbody)
     container.appendChild(table)

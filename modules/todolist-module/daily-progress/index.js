@@ -7,11 +7,11 @@ class DailyProgress {
         this.repo.createTable()
     }
     
-    get (item) {return this.repo.get(item)}
-    create (item) {this.repo.create(item)}
-    clearAll () {this.repo.clearAll()}
-    remove (id) {this.repo.delete(id)}
-    update (item) {this.repo.update(item)}
+    get = (item) => {item.show = true; return this.repo.get(item)}
+    getAll = () => {return this.repo.get({show: true})}
+    create (item) {item.show = true; this.repo.create(item)}
+    remove = (id) => {this.repo.update({id, show: false})}
+    update = (item) => {this.repo.update(item)}
 
     increment(id, date, amount, check) {
         let item = this.get({item_id: id, date: date.getDate(), month: date.getMonth(), year: date.getFullYear(), check})[0]
@@ -23,7 +23,7 @@ class DailyProgress {
         } 
     }
 
-    removeItem (id) {
+    removeItem = (id) => {
         let list = this.get({item_id: id})
         list.forEach(element => {
             this.remove(element.id)

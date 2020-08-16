@@ -10,12 +10,8 @@ ipcRenderer.on('todo:clear', () => {todolist.clearAll();daily_progress.clearAll(
 
 let daily_progress = new DailyProgress()
 let todolist = new Todolist()
-todolist.displayTodolist(daily_progress.createChart)
+todolist.displayTodolist(daily_progress.createChart, daily_progress.removeItem)
 
-function removeItem (item) {
-    todolist.remove(item)
-    daily_progress.removeItem(item.id)
-}
 function increment (item, check, amount) {
     if(check=='1') {
         if(parseInt(item.progress)+amount >= 0 && parseInt(item.progress)+amount <= parseInt(item.total)) {

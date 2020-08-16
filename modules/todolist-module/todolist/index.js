@@ -6,21 +6,21 @@ class Todolist {
         this.repo.createTable()
     }
 
-    create (item) {this.repo.create(item)}
-    clearAll () {this.repo.clearAll()}
-    remove (item) {this.repo.delete(item.id)}
-    update (item) {this.repo.update(item)}
-    getAll() {this.repo.getAll()}
+    get = (item) => {item.show = true; return this.repo.get(item)}
+    getAll = () => {return this.repo.get({show: true})}
+    create (item) {item.show = true; this.repo.create(item)}
+    remove (id) {this.repo.update({id, show: false})}
+    update = (item) => {this.repo.update(item)}
 
     // Reading data from db and writing it in the table
-    displayTodolist(chart_generator) {
-        let data = this.repo.getAll()
+    displayTodolist(chart_generator, removeItem) {
+        let data = this.getAll()
         data.forEach((item, _) => {
-            this.addEntry(item, chart_generator)
+            this.addEntry(item, chart_generator, removeItem)
         })
     }
 
-    addEntry(item, chart_generator) {
+    addEntry(item, chart_generator, removeItem) {
         const td = document.getElementById('todolist-container')
         let total_container = document.createElement('div')
         total_container.className = "ui container border-top--grey"
@@ -30,10 +30,15 @@ class Todolist {
         let header = document.createElement('div')
         header.className = "content"
         header.innerHTML = item.name
-        header.addEventListener('dblclick', () => {
-            removeItem(item)
-        })
         header_div.appendChild(header)
+        let trash = document.createElement('i')
+        trash.className = "trash alternate outline icon float--right red cursor--pointer"
+        trash.style.fontSize = "20px"
+        trash.addEventListener('dblclick', () => {
+            this.remove(item.id)
+            removeItem(item.id)
+        })
+        header_div.appendChild(trash)
         total_container.appendChild(header_div)
     
         let container = document.createElement('div')
