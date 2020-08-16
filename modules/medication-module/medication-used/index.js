@@ -1,5 +1,5 @@
 const Repository = require('../../../database/repository.js')
-const create_list = require('../../list/index')
+const create_list = require('../../tools/list/index')
 
 class MedicationUsed {
     constructor() {

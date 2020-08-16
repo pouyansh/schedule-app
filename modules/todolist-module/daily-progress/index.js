@@ -1,5 +1,5 @@
 const Repository = require('../../../database/repository.js')
-const chart_generator = require('../../chart/index')
+const chart_generator = require('../../tools/chart/index')
 
 class DailyProgress {
     constructor() {

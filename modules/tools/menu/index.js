@@ -1,4 +1,4 @@
-const Repository = require('../../database/repository')
+const Repository = require('../../../database/repository')
 
 class Menu {
     constructor() {

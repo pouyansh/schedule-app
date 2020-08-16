@@ -1,4 +1,4 @@
-const Menu = require('./menu/index')
+const Menu = require('./tools/menu/index')
 
 // Create Menu Objects
 let create_menu = (name) => {

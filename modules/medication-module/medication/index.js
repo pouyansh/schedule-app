@@ -1,5 +1,5 @@
 const Repository = require('../../../database/repository.js')
-const create_table = require('../../table/index')
+const create_table = require('../../tools/table/index')
 
 class Medication {
     constructor() {
