@@ -6,13 +6,13 @@ class Habit {
         this.repo.createTable()
     }
     
-    get (item) {item.show = true; return this.repo.get(item)}
+    get = (item) => {item.show = true; return this.repo.get(item)}
     getAll = () => {return this.repo.get({show: true})}
     create (item) {item.show = true; this.repo.create(item)}
-    remove (id) {this.repo.update({id, show: false})}
+    remove = (id) => {this.repo.update({id, show: false})}
     update = (item) => {this.repo.update(item)}
 
-    show_habits = (increment, create_chart) => {
+    show_habits = (increment, create_chart, removeItem) => {
         let list = this.getAll()
         list.forEach(element => {
             element.d = new Date(element.last_record)
@@ -37,6 +37,7 @@ class Habit {
             trash.style.fontSize = "20px"
             trash.addEventListener('dblclick', () => {
                 this.remove(element.id)
+                removeItem(element.id)
             })
             header_div.appendChild(trash)
             total_container.appendChild(header_div)

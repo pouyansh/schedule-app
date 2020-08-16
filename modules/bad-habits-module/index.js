@@ -19,4 +19,4 @@ function add_habit () {
 }
 add_habit()
 
-habits.show_habits(habit_day.increment, habit_day.create_chart)
+habits.show_habits(habit_day.increment, habit_day.create_chart, habit_day.removeItem)

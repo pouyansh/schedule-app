@@ -7,12 +7,18 @@ class HabitDay {
         this.repo.createTable()
     }
 
-    get = (item) => {return this.repo.get(item)}
-    getAll = () => {return this.repo.getAll()}
-    create (item) {this.repo.create(item)}
-    clearAll () {this.repo.clearAll()}
-    remove (id) {this.repo.delete(id)}
-    update (item) {this.repo.update(item)}
+    get = (item) => {item.show = true; return this.repo.get(item)}
+    getAll = () => {return this.repo.get({show: true})}
+    create (item) {item.show = true; this.repo.create(item)}
+    remove = (id) => {this.repo.update({id, show: false})}
+    update = (item) => {this.repo.update(item)}
+
+    removeItem = (id) => {
+        let list = this.get({habit: id})
+        list.forEach(element => {
+            this.remove(element.id)
+        })
+    }
 
     increment = (habit_id, amount) => {
         let d = new Date(Date.now())
@@ -40,25 +46,58 @@ class HabitDay {
         list.sort(function (a,b) {
             return a.d - b.d
         })
-        let dif_days = (list[0].d - list[list.length-1].d)/(1000 * 60 * 60 * 24) + 1
-        let chart_list = [], max = 0, prev = 0, colors = []
-        if(dif_days < 28) {
-            list.forEach(element => {
-                chart_list.push(element.amount)
-                if (element.amount > prev) {
-                    colors.push("rgba(255,0,0,0.6)")
-                } else if(element.amount > 2/3*prev) {
-                    colors.push("rgba(255,156,0,0.6)")
-                } else if(element.amount > 1/3*prev) {
-                    colors.push("rgba(255,255,0,0.6)")
-                } else {
-                    colors.push("rgba(35,195,0,0.6)")
+        if (list.length > 0) {
+            let d = new Date(Date.now())
+            d = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0,0,0,0)
+            let dif_days = (d - list[0].d)/(1000 * 60 * 60 * 24) + 1
+            let chart_list = [], max = 0, prev = 0, colors = []
+            if(dif_days < 28) {
+                let pointer = 0
+                let temp_d = list[0].d
+                for(var i = 0; i < dif_days; i ++) {
+                    if (list[pointer].d - temp_d == 0){
+                        chart_list.push(list[pointer].amount)
+                        if (list[pointer].amount > prev) {
+                            colors.push("rgba(255,0,0,0.6)")
+                        } else if(list[pointer].amount > 2/3*prev) {
+                            colors.push("rgba(255,156,0,0.6)")
+                        } else if(list[pointer].amount > 1/3*prev) {
+                            colors.push("rgba(255,255,0,0.6)")
+                        } else {
+                            colors.push("rgba(35,195,0,0.6)")
+                        }
+                        if (list[pointer].amount > max) max = list[pointer].amount
+                        prev = list[pointer].amount
+                        pointer = pointer + 1
+                    } else {
+                        chart_list.push(0)
+                        colors.push("rgba(35,195,0,0.6)")
+                    }
+                    temp_d.setDate(temp_d.getDate() + 1)
                 }
-                if (element.amount > max) max = element.amount
-                prev = element.amount
-            })
+            } else {
+                let temp_d = list[0].d
+                let pointer = 0
+                for(var i = 0; i < dif_days; i ++) {
+                    if (list[pointer].d - temp_d == 0){
+                        if (temp_d.getDay() == 0) {
+                            chart_list.push(list[pointer].amount)
+                            if (list[pointer].amount > max) max = list[pointer].amount
+                        } else {
+                            if (chart_list.length == 0) chart_list.push(0)
+                            chart_list[chart_list.length - 1] = chart_list[chart_list.length - 1] + list[pointer].amount
+                            if (chart_list[chart_list.length - 1] > max) max = chart_list[chart_list.length - 1]
+                        }
+                        pointer = pointer + 1
+                    } else {
+                        if (temp_d.getDay() == 0) chart_list.push(0)
+                    }
+                    temp_d.setDate(temp_d.getDate() + 1)
+                }
+            }
+            return chart_generator(chart_list, max, false, colors)
         }
-        return chart_generator(chart_list, max, false, colors)
+        return document.createElement('div')
     }
 }
 
