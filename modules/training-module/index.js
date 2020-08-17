@@ -9,7 +9,7 @@ ipcRenderer.on('training:add_category', (_, item) => {training_list.create(item)
 ipcRenderer.on('training:add', (_, item) => {training.create(item)})
 
 const create_menu = require('../index')
-create_menu('Training')
+create_menu('Work out')
 
 // Filling select_training
 function fill_select_training () {

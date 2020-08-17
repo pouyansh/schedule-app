@@ -1,7 +1,8 @@
-let chart_generator = (list, max, accumulative = "true", colors = []) => {
+let chart_generator = (list, max, accumulative = "true", colors = [], id = "id") => {
     let container = document.createElement('div')
     let table = document.createElement('table')
     table.className = "graph"
+    table.setAttribute('id', id)
     let tbody = document.createElement('tbody')
     let tr, td, span
     let sum = 0
@@ -21,10 +22,10 @@ let chart_generator = (list, max, accumulative = "true", colors = []) => {
         td.appendChild(span)
         tr.appendChild(td)
         tbody.appendChild(tr)
-        let style = document.createElement('style')
-        style.innerHTML = ".graph tbody:before {content: '" + max + "'} "
-        tbody.appendChild(style)
     }
+    let style = document.createElement('style')
+    style.innerHTML = "#" + id + " tbody:before {content: '" + max + "'} "
+    table.appendChild(style)
     table.appendChild(tbody)
     container.appendChild(table)
     return container

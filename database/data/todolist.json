@@ -2,17 +2,10 @@
   "todolist": [
     {
       "name": "Review Gabow's Paper",
-      "progress": 0,
+      "progress": 1,
       "total": 2,
       "show": true,
       "id": 1597495868254
-    },
-    {
-      "name": "Meeting with Sharath (Thursday 18:30)",
-      "progress": "0",
-      "total": "1",
-      "show": false,
-      "id": 1597495916789
     }
   ]
 }
