@@ -152,6 +152,54 @@ class Todolist {
         if(precentage < 99) return 'green'
         return 'blue'
     }
+
+    displaySummary () {
+        let div = document.createElement('div')
+        div.className = "ui container"
+        let table = document.createElement('table')
+        table.className = "ui single line table table-layout--fixed"
+        table.innerHTML = "<thead><tr><th>Title</th><th>Progress</th></tr></thead>"
+        let tbody = document.createElement('tbody')
+        let list = this.getAll()
+        let counter = 1
+        list.forEach(element => {
+            if (parseInt(element.progress) < parseInt(element.total)) {
+                let tr = document.createElement('tr')
+                counter += 1
+                let td = document.createElement('td')
+                td.innerHTML = element.name
+                tr.appendChild(td)
+                td = document.createElement('td')
+                
+                let container = document.createElement('div')
+                let color = this.get_color(element.progress, element.total)
+                container.setAttribute('class', 'ui tiny progress full-length little-padding ' + color)
+                container.setAttribute('data-value', parseInt(element.progress))
+                container.setAttribute('data-total', parseInt(element.total))
+                container.setAttribute('id', element.id)
+            
+                let bar = document.createElement('div')
+                bar.setAttribute('class', 'bar')
+                bar.style.width = parseInt(element.progress)/parseInt(element.total)*100 + '%'
+                let progress = document.createElement('div')
+                progress.setAttribute('class', 'progress')
+                bar.appendChild(progress)
+                container.appendChild(bar)
+            
+                let label = document.createElement('div')
+                label.setAttribute('class', 'label')
+                label.innerHTML = element.name + ' (' + element.progress + '/' + element.total + ')'
+                container.appendChild(label)
+                td.appendChild(container)
+
+                tr.appendChild(td)
+                tbody.appendChild(tr)
+            }
+        })
+        table.appendChild(tbody)
+        div.appendChild(table)
+        return(div)
+    }
 }
 
 module.exports = Todolist

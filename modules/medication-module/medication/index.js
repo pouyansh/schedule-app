@@ -83,9 +83,6 @@ class Medication {
             let prev_use = ""
             if(used.length > 0)
                 prev_use = (parseInt(used[0].month)+1) + "/" + used[0].date + "--" + used[0].hour + ":00"
-            // for(var i = 0; i < Math.min(5, used.length); i ++) {
-            //     prev_use = prev_use + (parseInt(used[i].month)+1) + "/" + used[i].date + "--" + used[i].hour + ":00<br>"
-            // }
             let d
             if (element.next_use) {
                 d = new Date(element.next_use)
@@ -94,6 +91,22 @@ class Medication {
         });
         total_container.appendChild(create_table(["Medicine", "Next date to use", "Last time used"], table_data, showPrevTable))
         container.appendChild(total_container)
+    }
+
+    displaySummary() {
+        let table_data = []
+        let list = this.getAll()
+        let now = new Date(Date.now())
+        now.setDate(now.getDate() + 1)
+        list.forEach(element => {
+            if (element.next_use != "") {
+                let d = new Date(element.next_use)
+                if (d < now)
+                    table_data.push([element.name, element.next_use ? (d.getMonth()+1) + "/" + d.getDate() + "--" + d.getHours() + ":00" : '-'])
+            }
+        });
+        return create_table(["Medicine", "Next date to use"], table_data)
+
     }
 }
 
