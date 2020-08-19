@@ -147,7 +147,7 @@ class Training {
         });
     }
 
-    create_statistics (element, check) {
+    create_statistics (element, check, summary = false) {
         let {sum, sum_calories, avg_difficulty, len} = this.get_statistics(element, check)
         var hours = (sum / 60);
         var rhours = Math.floor(hours);
@@ -161,12 +161,16 @@ class Training {
         header_div.className = "statistic ui header text-align--center margin--auto"
         let header = document.createElement('div')
         header.className = "content"
-        if(check == 1)
-            header.innerHTML = "All Time"
-        else if (check == 2)
-            header.innerHTML = "Cur. Week"
-        else 
-            header.innerHTML = "Last Week"
+        if(summary) {
+            header.innerHTML = element.name
+        } else {
+            if(check == 1)
+                header.innerHTML = "All Time"
+            else if (check == 2)
+                header.innerHTML = "Cur. Week"
+            else 
+                header.innerHTML = "Last Week"
+        }
         header_div.appendChild(header)
         container.appendChild(header_div)
 
@@ -218,6 +222,15 @@ class Training {
         div_statistics.appendChild(label)
         container.appendChild(div_statistics)
 
+        return container
+    }
+
+    displaySummary(get_table_list) {
+        let container = document.createElement('div')
+        let table_list = get_table_list()
+        table_list.forEach(element => {
+            container.appendChild(this.create_statistics(element, 2, true))
+        });
         return container
     }
 }

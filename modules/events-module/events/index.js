@@ -106,6 +106,47 @@ class Events {
 
         container.appendChild(total_container)
     }
+
+    displaySummary(getCategory) {
+        let list = this.getAll()
+        let now = new Date(Date.now())
+        let next_week = new Date(Date.now())
+        next_week.setDate(next_week.getDate() + 7)
+        let list_div = document.createElement('div')
+        list_div.className = "ui big relaxed divided list"
+        let item, icon, content, desc, d
+        list.forEach(element => {
+            if (element.date != "") {
+                let d = new Date(element.date)
+                if (d < next_week && d > now){
+                    let category = getCategory({id: parseInt(element.category)})[0]
+                    item = document.createElement('div')
+                    item.className = "item"
+                    icon = document.createElement('i')
+                    icon.className = category.code + " large middle aligned icon"
+                    icon.style.color = category.color
+                    content = document.createElement('div')
+                    content.className = "content"
+                    let header = document.createElement('div')
+                    header.className = "header"
+                    header.innerHTML = element.title
+                    content.appendChild(header)
+                    desc = document.createElement('div')
+                    desc.className = "description little-margin"
+                    d = new Date(element.date)
+                    desc.innerHTML = (d.getMonth()+1) + "/" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes()
+                    if(d.getMinutes() == 0) desc.innerHTML = desc.innerHTML + "0"
+                    content.appendChild(desc)
+                    item.appendChild(icon)
+                    item.appendChild(content)
+                    list_div.appendChild(item)
+                }
+                   
+            }
+        });
+        return list_div
+
+    }
 }
 
 module.exports = Events
