@@ -53,11 +53,11 @@ class HabitDay {
             let chart_list = [], max = 0, prev = 0, colors = []
             if(dif_days < 28) {
                 let pointer = 0
-                let temp_d = list[0].d
+                let temp_d = new Date(list[0].d)
                 for(var i = 0; i < dif_days; i ++) {
                     if (list[pointer].d - temp_d == 0){
                         chart_list.push(list[pointer].amount)
-                        if (list[pointer].amount > prev) {
+                        if (list[pointer].amount >= prev) {
                             if(habit.bad) {
                                 colors.push("rgba(255,0,0,0.6)")
                             } else {
@@ -84,7 +84,8 @@ class HabitDay {
                         }
                         if (list[pointer].amount > max) max = list[pointer].amount
                         prev = list[pointer].amount
-                        pointer = pointer + 1
+                        if (pointer < list.length - 1)
+                            pointer = pointer + 1
                     } else {
                         chart_list.push(0)
                         colors.push("rgba(35,195,0,0.6)")
@@ -111,7 +112,7 @@ class HabitDay {
                     temp_d.setDate(temp_d.getDate() + 1)
                 }
             }
-            return chart_generator(chart_list, max, false, colors)
+            return chart_generator(chart_list, max, false, colors, "habit" + habit.id)
         }
         return document.createElement('div')
     }
