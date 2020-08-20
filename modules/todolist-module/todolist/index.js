@@ -127,14 +127,16 @@ class Todolist {
         }
         total_container.appendChild(button_div)
 
-        let div_input = document.createElement('div')
-        div_input.className = "ui input full-length"
-        let input = document.createElement('input')
-        input.setAttribute('type', 'number')
-        input.setAttribute('placeholder', "Enter amount of change (empty equals 1)")
-        input.setAttribute('id', 'input' + item.id)
-        div_input.appendChild(input)
-        total_container.appendChild(div_input)
+        if(parseInt(item.progress) < parseInt(item.total)) {
+            let div_input = document.createElement('div')
+            div_input.className = "ui input full-length"
+            let input = document.createElement('input')
+            input.setAttribute('type', 'number')
+            input.setAttribute('placeholder', "Enter amount of change (empty equals 1)")
+            input.setAttribute('id', 'input' + item.id)
+            div_input.appendChild(input)
+            total_container.appendChild(div_input)
+        }
 
         total_container.appendChild(chart_generator(item.id, parseInt(item.total)))
     
