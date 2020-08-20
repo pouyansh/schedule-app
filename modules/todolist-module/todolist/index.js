@@ -101,11 +101,17 @@ class Todolist {
         button.setAttribute('class', 'ui primary basic button bold-text')
         button.innerHTML = '++'
         button.addEventListener('click', function (){
-            let amount = parseInt(document.getElementById("input" + item.id).value)
-                if(amount)
-                    increment(item, '0', amount)
-                else
-                    increment(item, '0', 1)
+            let input = document.getElementById("input" + item.id)
+            let amount
+            if (input) {
+                amount = parseInt(input.value)
+            } else {
+                amount = 1
+            }
+            if(amount)
+                increment(item, '0', amount)
+            else
+                increment(item, '0', 1)
         })
         button_div.appendChild(button)
     

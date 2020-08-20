@@ -6,12 +6,11 @@ class EventCategory {
         this.repo.createTable()
     }
     
-    get = (item) => {return this.repo.get(item)}
-    getAll = () => {return this.repo.getAll()}
-    create (item) {this.repo.create(item)}
-    clearAll () {this.repo.clearAll()}
-    remove (id) {this.repo.delete(id)}
-    update (item) {this.repo.update(item)}
+    get = (item) => {item.show = true; return this.repo.get(item)}
+    getAll = () => {return this.repo.get({show: true})}
+    create (item) {item.show = true; this.repo.create(item)}
+    remove (id) {this.repo.update({id, show: false})}
+    update = (item) => {this.repo.update(item)}
 }
 
 module.exports = EventCategory

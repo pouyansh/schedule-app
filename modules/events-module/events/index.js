@@ -6,14 +6,13 @@ class Events {
         this.repo.createTable()
     }
     
-    get (item) {return this.repo.get(item)}
-    getAll = () => {return this.repo.getAll()}
-    create (item) {this.repo.create(item)}
-    clearAll () {this.repo.clearAll()}
-    remove (id) {this.repo.delete(id)}
-    update (item) {this.repo.update(item)}
+    get = (item) => {item.show = true; return this.repo.get(item)}
+    getAll = () => {return this.repo.get({show: true})}
+    create (item) {item.show = true; this.repo.create(item)}
+    remove (id) {this.repo.update({id, show: false})}
+    update = (item) => {this.repo.update(item)}
 
-    show_events(getCategory, check = "after") {
+    show_events = (getCategory, check = "after") => {
         let list = this.getAll()
         list.forEach(element => {
             element.d = new Date(element.date)
@@ -90,6 +89,29 @@ class Events {
             button_div.setAttribute('class', 'ui buttons buttons')
             
             let button = document.createElement('button')
+            button.setAttribute('class', 'ui primary basic button bold-text')
+            button.innerHTML = 'Reschedule'
+            button.addEventListener('click', () => {
+                let amount = document.getElementById("input" + element.id).value
+                if (amount) {
+                    let splitted = amount.split(' ')
+                    if (splitted.length == 2) {
+                        let date = splitted[0].split('/')
+                        if (date.length == 3) {
+                            let time = splitted[1].split(':')
+                            if (time.length == 2) {
+                                let d = new Date(parseInt(date[2]), parseInt(date[0]) - 1, parseInt(date[1]), parseInt(time[0]), parseInt(time[1]), 0,0)
+                                this.update({id: element.id, date: d})
+                            }
+                        }
+                    }
+                }
+            })
+            button_div.appendChild(button)
+            let div_or = document.createElement('div')
+            div_or.setAttribute('class', 'or')
+            button_div.appendChild(div_or)
+            button = document.createElement('button')
             button.className = "ui red basic button"
             button.innerHTML = "Delete"
             button.addEventListener('click', ()=>{
@@ -97,6 +119,15 @@ class Events {
             })
             button_div.appendChild(button)
             change_div.appendChild(button_div)
+
+            let div_input = document.createElement('div')
+            div_input.className = "ui input full-length"
+            let input = document.createElement('input')
+            input.setAttribute('type', 'text')
+            input.setAttribute('placeholder', "Enter new date (M/D/Y H:M)")
+            input.setAttribute('id', 'input' + element.id)
+            div_input.appendChild(input)
+            change_div.appendChild(div_input)
             total_container.appendChild(change_div)
 
             item.appendChild(change_div)
