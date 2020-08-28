@@ -8,7 +8,13 @@ class Todolist {
 
     get = (item) => {item.show = true; return this.repo.get(item)}
     getAll = () => {return this.repo.get({show: true})}
-    create (item) {item.show = true; this.repo.create(item)}
+    create (item, increment) {
+        item.show = true
+        this.repo.create(item)
+        if (item.progress > 0) {
+            increment(item.id, new Date(Date.now()), item.progress, '1')
+        }
+    }
     remove (id) {this.repo.update({id, show: false})}
     update = (item) => {this.repo.update(item)}
 

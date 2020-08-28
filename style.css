@@ -95,6 +95,10 @@
 
 .table-layout--fixed {table-layout: fixed;}
 
+.max-height--200 {max-height: 200px;overflow-y: scroll;}
+.max-height--300 {max-height: 300px;overflow-y: scroll;}
+.max-height--350 {max-height: 350px;overflow-y: scroll;}
+
 .graph {
 	margin-bottom:1em;
   font:normal 100%/150% arial,helvetica,sans-serif;

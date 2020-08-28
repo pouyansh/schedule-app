@@ -49,7 +49,7 @@ class Events {
         total_container.appendChild(header_div)
 
         let list_div = document.createElement('div')
-        list_div.className = "ui big relaxed divided list"
+        list_div.className = "ui big relaxed divided list max-height--350"
         let item, icon, content, desc, d
         new_list.forEach(element => {
             let category = getCategory({id: parseInt(element.category)})[0]

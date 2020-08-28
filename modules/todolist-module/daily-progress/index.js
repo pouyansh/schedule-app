@@ -13,7 +13,7 @@ class DailyProgress {
     remove = (id) => {this.repo.update({id, show: false})}
     update = (item) => {this.repo.update(item)}
 
-    increment(id, date, amount, check) {
+    increment = (id, date, amount, check) => {
         let item = this.get({item_id: id, date: date.getDate(), month: date.getMonth(), year: date.getFullYear(), check})[0]
         if (item) {
             item.amount = parseInt(item.amount) + amount

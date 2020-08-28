@@ -19,6 +19,9 @@ class Training {
         list.forEach(element => {
             element.d = new Date(parseInt(element.year), parseInt(element.month), parseInt(element.date), 0,0,0,0)
         })
+        list.sort(function(a, b) {
+            return b.d - a.d 
+        });
         let sum = 0, sum_calories = 0, sum_difficulties = 0, num = 0, table_creation_list = []
         let chart_period_list = [0,0,0,0,0,0,0], chart_cal_list = [0,0,0,0,0,0,0]
         if (check == 1) {
@@ -66,9 +69,7 @@ class Training {
             });
         } else {
             let now = new Date(Date.now())
-            console.log(now.getDay())
             now.setDate(now.getDate() - now.getDay() - 1)
-            console.log(now)
             list.forEach(element => {
                 if ((now - element.d) / (1000 * 60 * 60 * 24) < 7 && (now - element.d) / (1000 * 60 * 60 * 24) > 0 && now.getDay() >= element.d.getDay()) {
                     sum = sum + parseInt(element.period)

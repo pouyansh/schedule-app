@@ -1,4 +1,6 @@
 let list_generator = (list) => {
+    let total_container = document.createElement('div')
+    total_container.className = "max-height--200"
     let container = document.createElement('div')
     container.className = "ui ordered list"
     let item, content, header
@@ -14,7 +16,8 @@ let list_generator = (list) => {
         // item.appendChild(content)
         container.appendChild(item)
     });
-    return container
+    total_container.appendChild(container)
+    return total_container
 }
 
 module.exports = list_generator

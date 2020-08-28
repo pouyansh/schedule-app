@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <meta charset = "UTF-8">
+        <title>Daily Schedule</title>
+        <link rel="stylesheet" type="text/css" href="../../Semantic-UI-CSS-master/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="../../style.css">
+        <script>window.$ = window.jQuery = require('jquery');</script>
+   </head>
+   
+   <body>
+        <div class="background"></div> 
+        <div class="width-90 padding-top--5rem">
+            <div class="ui grid">
+                <div class="twelve wide stretched column">
+                    <div class="ui segment background--white-60" id="sections">
+                        <div class="active" id="section">
+                            <div class="row">
+                                <div id='list' class="list-container background--white-60">
+                                    <h1 class="ui header">
+                                        <i class="clipboard list icon"></i>
+                                        <div class="content">
+                                            Daily Schedule
+                                        </div>
+                                    </h1>
+                                    <div id="container">
+                                    </div>
+                                </div>
+                            
+                                <div class="toolbar">
+                                    <div class="ui card background--white-60">
+                                        <div class="content">
+                                            <div class="header">Add task</div>
+                                        </div>
+                                        <div class="content">
+                                            <form id='task_form'>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="text" id="title" placeholder="Enter task's title">
+                                                </div>
+                                                <div class="ui input little-margin full-length">
+                                                    <input type="text" id="date" placeholder="Date (M/D/Y)">
+                                                </div>
+                                                <select class="ui fluid search dropdown little-margin" id="type">
+                                                    <option value="1">Start and end time</option>
+                                                    <option value="2">Duration</option>
+                                                </select>
+                                                <div class="show" id="section1">
+                                                    <div class="ui input little-margin full-length">
+                                                        <input type="text" id="start" placeholder="Start time (HH:MM)">
+                                                    </div>
+                                                    <div class="ui input little-margin full-length">
+                                                        <input type="text" id="finish" placeholder="End time (HH:MM)">
+                                                    </div>
+                                                </div>
+                                                <div class="hidden" id="section2">
+                                                    <div class="ui input little-margin full-length">
+                                                        <input type="text" id="duration" placeholder="Duration (HH:MM)">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="ui primary button">Add event</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <div class="ui vertical fluid right tabular menu background--white-60 border-radius--1rem" id="menu">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="index.js"></script>
+   </body>
+</html>

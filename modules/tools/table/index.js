@@ -1,4 +1,6 @@
 const create_table = (header, list, onclick = ()=>{}) => {
+    let container = document.createElement('div')
+    container.className = "max-height--300"
     let table = document.createElement('table')
     table.className = "ui single line table"
 
@@ -26,7 +28,8 @@ const create_table = (header, list, onclick = ()=>{}) => {
         tbody.appendChild(tr)
     });
     table.appendChild(tbody)
-    return table
+    container.appendChild(table)
+    return container
 }
 
 module.exports = create_table
