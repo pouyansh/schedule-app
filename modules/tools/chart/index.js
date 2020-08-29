@@ -1,4 +1,4 @@
-let chart_generator = (list, max, accumulative = "true", colors = [], id = "id") => {
+let chart_generator = (list, max, accumulative = true, colors = [], id = "id") => {
     let container = document.createElement('div')
     let table = document.createElement('table')
     table.className = "graph"
@@ -9,9 +9,9 @@ let chart_generator = (list, max, accumulative = "true", colors = [], id = "id")
     for(var i = 0; i < list.length; i++) {
         sum = sum + list[i]
         tr = document.createElement('tr')
-        if(accumulative)
+        if(accumulative) {
             tr.style.height = sum/max*100 + "%"
-        else
+        } else
             tr.style.height = list[i]/max*100 + "%"
         td = document.createElement('td')
         if(colors.length > 0) {

@@ -17,8 +17,11 @@ class Events {
         list.forEach(element => {
             element.d = new Date(element.date)
         })
-        list.sort(function(a, b) {
-            return a.d - b.d 
+        list.sort((a, b) => {
+            if (check == "after")
+                return a.d - b.d 
+            else
+                return b.d - a.d
         });
         list.forEach(element => {
             element.cat = getCategory({id: parseInt(element.category)})
@@ -56,10 +59,10 @@ class Events {
             item = document.createElement('div')
             item.className = "item"
             icon = document.createElement('i')
-            icon.className = category.code + " large middle aligned icon"
+            icon.className = category.code + " large middle aligned icon float--left"
             icon.style.color = category.color
             content = document.createElement('div')
-            content.className = "content"
+            content.className = "content float--right width-90"
             header = document.createElement('div')
             header.className = "header cursor--pointer"
             header.innerHTML = element.title
@@ -75,8 +78,17 @@ class Events {
             desc = document.createElement('div')
             desc.className = "description little-margin"
             d = new Date(element.date)
-            desc.innerHTML = (d.getMonth()+1) + "/" + d.getDate() + "  " + d.getHours() + ":" + d.getMinutes()
-            if(d.getMinutes() == 0) desc.innerHTML = desc.innerHTML + "0"
+            let dif = ((d - Date.now()) / (1000 * 60 * 60 * 24)).toFixed(0)
+            let m = d.getMonth()+1
+            if (m < 10) m = '0' + m
+            let dd = d.getDate()
+            if (dd < 10) dd = '0' + dd
+            let hh = d.getHours()
+            if (hh < 10) hh = '0' + hh
+            let mm = d.getMinutes()
+            if (mm < 10) mm = '0' + mm
+            desc.innerHTML = m + "/" + dd  + "&nbsp;&nbsp;" + hh + ":" + mm
+            if (check == "after") desc.innerHTML = desc.innerHTML + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(" + dif + " days)"
             content.appendChild(desc)
             item.appendChild(icon)
             item.appendChild(content)

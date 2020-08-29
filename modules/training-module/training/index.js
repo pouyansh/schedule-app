@@ -86,7 +86,10 @@ class Training {
                 }
             });
         }
-        return {sum, sum_calories, avg_difficulty: (sum_difficulties/num).toFixed(1), len: num, table_creation_list, chart_cal_list, chart_period_list}
+        let avg_difficulty = 0
+        if (sum_difficulties > 0)
+            avg_difficulty = (sum_difficulties/num).toFixed(1)
+        return {sum, sum_calories, avg_difficulty, len: num, table_creation_list, chart_cal_list, chart_period_list}
     }
 
     addEntry (element) {
@@ -154,6 +157,8 @@ class Training {
         var rhours = Math.floor(hours);
         var minutes = (hours - rhours) * 60;
         var rminutes = Math.round(minutes);
+        if (rminutes < 10)
+            rminutes = '0' + rminutes
 
         let container = document.createElement('div')
         container.className = "ui tiny statistics no-margin little-padding"
